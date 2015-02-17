@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         WrapperTest.DegeneratedTests.class,
-        WrapperTest.NormalTests.class
+        WrapperTest.WrapWordsTests.class
 })
 public class WrapperTest {
 
@@ -23,7 +23,7 @@ public class WrapperTest {
         }
     }
 
-    public static class NormalTests {
+    public static class WrapWordsTests {
 
         @Test
         public void testSingleWrap() {
@@ -39,6 +39,38 @@ public class WrapperTest {
         public void testMultipleExactWraps() {
             assertEquals("wrap\nmewr\napme\nwrap", Wrapper.wrap("wrapmewrapmewrap", 4));
         }
+
+
+
+        @Test
+        public void testWrapWithSpace() {
+           assertEquals("wrap\nme", Wrapper.wrap("wrap me", 4));
+
+        }
+
+        @Test
+        public void testWrapWithMoreSpaces() {
+           assertEquals("wrap\nme\nwrap\nme\nwrap", Wrapper.wrap("wrap me wrap me wrap", 4));
+
+        }
+
+        @Test
+        public void testWrapWithMoreSpaces2() {
+            assertEquals("wrap me\nwrap me\nwrap", Wrapper.wrap("wrap me wrap me wrap", 10));
+        }
+
+
+
+        @Test
+        public void shortColumnLength() {
+            assertEquals("wor\nd\nwor\nd", Wrapper.wrap("word word", 3));
+        }
+
+        @Test
+        public void longColumnLength() {
+            assertEquals("word word\nword", Wrapper.wrap("word word word", 12));
+        }
+
 
     }
 }
