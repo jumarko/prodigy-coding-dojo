@@ -13,5 +13,5 @@ public abstract class Knapsack {
         this.size = size;
     }
 
-    public abstract List<Boolean> solve(List<Integer> things);
+    public abstract List<Item> solve(Item ... items);
 }
