@@ -3,10 +3,11 @@ package com.gooddata.knapsack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
- * TODO
+ * Implementation of Greedy algorithm for 0-1 Knapsack problem.
  */
 public class GreedyKnapsack extends Knapsack {
     public GreedyKnapsack(int size) {
@@ -32,14 +33,7 @@ public class GreedyKnapsack extends Knapsack {
 
     private void sortItems(Item[] items) {
         Arrays.sort(items,
-                (i1, i2) -> {
-                    int diff = i2.getValue() - i1.getValue();
-                    if (diff == 0) {
-                        return i1.getWeight() - i2.getWeight();
-                    } else {
-                        return diff;
-                    }
-                }
-        );
+                Comparator.comparing(Item::getValue).reversed() // prefer highest-value items
+                        .thenComparing(Item::getWeight)); // prefer lightest items
     }
 }
