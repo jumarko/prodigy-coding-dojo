@@ -1,6 +1,7 @@
 package com.gooddata.knapsack;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -38,8 +39,18 @@ public class GeneticKnapsackTest {
         )), contains(
                 new Item[] { new Item(1), new Item(2), new Item(18) },
                 new Item[] { new Item(10), new Item(19) },
-                new Item[] { new Item(30) }
+                new Item[] { new Item(30) },
+                new Item[] { new Item(28), new Item(3)}
         ));
+
+    }
+
+    @Test
+    public void testCross() throws Exception {
+        assertThat(knapsack.cross(Arrays.asList(new Item[]{new Item(1), null, new Item(2), new Item(18)},
+                        new Item[]{new Item(1), new Item(2), null, new Item(18)}), 4),
+                contains(new Item[]{new Item(1), null, null, new Item(18)},
+                        new Item[] { new Item(1), new Item(2), new Item(2), new Item(18) }));
 
     }
 
