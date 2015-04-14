@@ -1,9 +1,14 @@
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class StringCalculatorTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     final StringCalculator calculator = new StringCalculator();
 
@@ -17,14 +22,12 @@ public class StringCalculatorTest {
     public void oneNumber() {
         assertThat(calculator.add("10"), is(10));
         assertThat(calculator.add(" 10   "), is(10));
-        assertThat(calculator.add("-574985"), is(-574985));
     }
 
     @Test
     public void twoNumbers() {
         assertThat(calculator.add("10,20"), is(30));
         assertThat(calculator.add(" 10, 20   "), is(30));
-        assertThat(calculator.add("-574985,1000000"), is(425015));
     }
 
     @Test
@@ -79,4 +82,32 @@ public class StringCalculatorTest {
         calculator.add("\n\n10\n20\n30");
     }
 
+    @Test
+    public void customDelimiter() {
+        assertThat(calculator.add("//;\n1;2"), is(3));
+    }
+
+    @Test
+    public void customDelimiterWithDefaults() {
+        assertThat(calculator.add("//;\n10\n20,30;40"), is(100));
+    }
+
+    @Test
+    public void customDelimiterEmpty() {
+        assertThat(calculator.add("//;\n"), is(0));
+    }
+
+    @Test
+    public void negativeNumber() {
+        expectedException.expect(StringCalculatorException.class);
+        expectedException.expectMessage("negative numbers not supported: -574985");
+        calculator.add("-574985");
+    }
+
+    @Test
+    public void multipleNegativeNumber() {
+        expectedException.expect(StringCalculatorException.class);
+        expectedException.expectMessage("negative numbers not supported: -10,-1,-3");
+        calculator.add("1,3,-10,0,-1,10,-3,100");
+    }
 }
