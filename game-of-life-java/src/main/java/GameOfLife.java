@@ -6,16 +6,17 @@ import java.util.stream.Stream;
 
 public class GameOfLife {
 
-    private final Set<Cell> firstGeneration = new HashSet<>();
+    private Set<Cell> generation = new HashSet<>();
 
     public GameOfLife(Set<Cell> firstGeneration) {
-        this.firstGeneration.addAll(firstGeneration);
+        this.generation.addAll(firstGeneration);
     }
 
     public Set<Cell> nextGeneration() {
         final Set<Cell> affectedCells = getAffectedCells();
 
-        return affectedCells.stream().filter(this::shouldLive).collect(Collectors.toSet());
+        generation = affectedCells.stream().filter(this::shouldLive).collect(Collectors.toSet());
+        return generation;
     }
 
     public boolean shouldLive(Cell cell) {
@@ -24,11 +25,11 @@ public class GameOfLife {
     }
 
     private boolean isAlive(Cell c) {
-        return firstGeneration.contains(c);
+        return generation.contains(c);
     }
 
     Set<Cell> getAffectedCells() {
-        return firstGeneration.stream().flatMap(GameOfLife::getNeighbours)
+        return generation.stream().flatMap(GameOfLife::getNeighbours)
                 .collect(Collectors.toSet());
     }
 

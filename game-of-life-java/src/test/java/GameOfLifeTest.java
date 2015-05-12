@@ -48,4 +48,29 @@ public class GameOfLifeTest {
                 new Cell(1,4), new Cell(2,4), new Cell(3,4)
         ))));
     }
+
+    /**
+     * Check http://en.wikipedia.org/wiki/File:Game_of_life_animated_glider.gif.
+     */
+    @Test
+    public void glider() {
+        final Set<Cell> firstGen = new HashSet<>(
+                asList(new Cell(1, 3), new Cell(2, 3), new Cell(3, 3), new Cell(3, 2), new Cell(2, 1))
+        );
+        gameOfLife = new GameOfLife(firstGen);
+
+        assertThat(gameOfLife.nextGeneration(), is(new HashSet<>(asList(
+                new Cell(1, 2), new Cell(3, 2), new Cell(2, 3), new Cell(3, 3), new Cell(2, 4)))));
+
+        assertThat(gameOfLife.nextGeneration(), is(new HashSet<>(asList(
+                new Cell(3, 2), new Cell(1, 3), new Cell(3, 3), new Cell(2, 4), new Cell(3, 4)))));
+
+        assertThat(gameOfLife.nextGeneration(), is(new HashSet<>(asList(
+                new Cell(2, 2), new Cell(3, 3), new Cell(4, 3), new Cell(2, 4), new Cell(3, 4)))));
+
+        assertThat(gameOfLife.nextGeneration(), is(new HashSet<>(asList(
+                new Cell(3, 2), new Cell(4, 3), new Cell(2, 4), new Cell(3, 4), new Cell(4, 4)))));
+
+
+    }
 }
