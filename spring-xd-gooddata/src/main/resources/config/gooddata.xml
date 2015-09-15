@@ -8,7 +8,7 @@
 	   http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <int:channel id="input"/>
-	<int:service-activator id="exampleServiceActivator" input-channel="input" method="loadToGoodData">
+	<int:service-activator id="exampleServiceActivator" input-channel="input" method="parseTweet">
         <bean class="com.gooddata.dojo.springxd.GoodDataActivator"/>
     </int:service-activator>
 </beans>
