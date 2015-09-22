@@ -9,6 +9,10 @@
 
     <int:channel id="input"/>
 	<int:service-activator id="exampleServiceActivator" input-channel="input" method="parseTweet">
-        <bean class="com.gooddata.dojo.springxd.GoodDataActivator"/>
+        <bean class="com.gooddata.dojo.springxd.GoodDataActivator">
+			<constructor-arg value="TODO: host"/>
+			<constructor-arg value="TODO: username"/>
+			<constructor-arg value="TODO: password"/>
+		</bean>
     </int:service-activator>
 </beans>

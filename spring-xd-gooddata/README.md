@@ -10,6 +10,9 @@ The GoodData spring-xd module can be used to load data from various sources to t
 * Deploy new stream using `goodDataSink`, e.g. twitter stream (xd shell): `stream create tweets --definition "twitterstream | gooddataSink" --deploy`
 * Destroy stream if you no longer need it: `stream destroy tweets`
 
+### Notes
+* You need to specify host, username and password for gooddata platform in gooddata.xml 
+
 
 ## Resources
 * Spring XD 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tweet {
@@ -86,6 +87,27 @@ public class Tweet {
 
     public void setTimestampMs(long timestampMs) {
         this.timestampMs = timestampMs;
+    }
+
+
+    public String asCsvLine() {
+        final StringJoiner fieldJoiner = new StringJoiner(",");
+        addField(fieldJoiner, id);
+        addField(fieldJoiner, text);
+        addField(fieldJoiner, source);
+        addField(fieldJoiner, user.getId());
+        addField(fieldJoiner, user.getName());
+        addField(fieldJoiner, retweetCount);
+        addField(fieldJoiner, favouriteCount);
+        addField(fieldJoiner, timestampMs);
+        addField(fieldJoiner, createdAt);
+        return fieldJoiner.toString();
+    }
+
+    private StringJoiner addField(StringJoiner fieldJoiner, Object fieldValue) {
+        return fieldJoiner.add("\""
+                + fieldValue.toString().replace("\"", "\"\"")
+                + "\"");
     }
 
     @Override

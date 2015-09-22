@@ -49,5 +49,30 @@
             </releases>
         </repository>
     </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>cz.geek</groupId>
+            <artifactId>gooddata-java</artifactId>
+            <version>0.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gooddata</groupId>
+            <artifactId>gooddata-http-client</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gooddata.commons</groupId>
+            <artifactId>gdc-commons-http-client</artifactId>
+            <version>2.7.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gooddata.commons</groupId>
+            <artifactId>spring-jackson1</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
+    </dependencies>
+
 
 </project>
